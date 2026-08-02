@@ -1,5 +1,7 @@
 # Apache Tika on Railway
 
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/apache-tika-secure?referralCode=ZqgrJ0)
+
 Deploy a private Apache Tika 3.3.1 parsing service behind an authenticated HTTPS proxy on Railway.
 
 The Deploy on Railway button is added after the published route is verified.
