@@ -2,8 +2,8 @@
 
 ## Apache Tika
 
-- Version: 3.3.1 official full container release
-- Source: https://github.com/apache/tika/tree/3.3.1
+- Version: 4.0.0 official full container release
+- Source: https://github.com/apache/tika/tree/4.0.0
 - Container source: https://github.com/apache/tika-docker
 - Copyright: The Apache Software Foundation
 - License: Apache License 2.0

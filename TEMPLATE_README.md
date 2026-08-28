@@ -2,7 +2,7 @@
 
 ## About Hosting Apache Tika
 
-Apache Tika extracts text and metadata from more than a thousand document formats. This template deploys the stable official `3.3.1.0-full` container behind an authenticated Caddy proxy.
+Apache Tika extracts text and metadata from more than a thousand document formats. This template deploys the stable official `4.0.0-1-full` container behind an authenticated Caddy proxy.
 
 Retrieve the generated `BASIC_AUTH_USER` and `BASIC_AUTH_PASSWORD` values from the proxy service before calling parsing endpoints.
 
@@ -24,7 +24,7 @@ Retrieve the generated `BASIC_AUTH_USER` and `BASIC_AUTH_PASSWORD` values from t
 
 Railway HTTPS routes to the proxy on port 8080. The proxy enforces generated HTTP Basic credentials, limits request bodies to 50 MB, and forwards requests over Railway private networking to Tika on port 9998. `/healthz` verifies the actual private Tika endpoint without exposing parsing APIs anonymously.
 
-The template pins both image tags and Linux/AMD64 manifests. It uses Tika 3.3.1 because that is the newest stable official container release; it does not silently use a 4.x prerelease or a moving `latest` tag.
+The template pins both image tags and Linux/AMD64 manifests. It uses Tika 4.0.0 because that is the newest stable official container release; it does not silently use a prerelease or a moving `latest` tag.
 
 ## Why Deploy Apache Tika on Railway?
 

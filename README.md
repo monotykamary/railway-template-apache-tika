@@ -2,13 +2,13 @@
 
 [![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/apache-tika-secure?referralCode=ZqgrJ0)
 
-Deploy a private Apache Tika 3.3.1 parsing service behind an authenticated HTTPS proxy on Railway.
+Deploy a private Apache Tika 4.0.0 parsing service behind an authenticated HTTPS proxy on Railway.
 
 The Deploy on Railway button is added after the published route is verified.
 
 ## What this deploys
 
-- Apache Tika Server `3.3.1.0-full`, pinned to the official Linux/AMD64 image digest
+- Apache Tika Server `4.0.0-1-full`, pinned to the official Linux/AMD64 image digest
 - Caddy `2.10.2-alpine`, pinned by digest
 - A public Caddy proxy with generated HTTP Basic authentication
 - A private Tika service reachable only over Railway's internal network
@@ -57,9 +57,9 @@ BASE_URL=https://your-domain.example BASIC_AUTH_USER=tika BASIC_AUTH_PASSWORD=..
 
 ## Upstream
 
-- Tika source: https://github.com/apache/tika/tree/3.3.1
+- Tika source: https://github.com/apache/tika/tree/4.0.0
 - Tika Docker source: https://github.com/apache/tika-docker
-- Documentation: https://tika.apache.org/3.3.1/
+- Documentation: https://tika.apache.org/4.0.0/
 - License: Apache License 2.0
 
 This repository contains only Railway deployment adapters and documentation. Apache Tika and Apache are trademarks of their respective owners. This project is not affiliated with Apache or Railway.

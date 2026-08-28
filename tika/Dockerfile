@@ -1,3 +1,3 @@
-FROM docker.io/apache/tika:3.3.1.0-full@sha256:a3892121eafdee277b860e458b9966abfd11112d49f84cd494f5e87da4292b95
+FROM docker.io/apache/tika:4.0.0-1-full@sha256:6c244af88e8575ebe8bf0bc5e2da03c49663dd0acc7809cd99c8e9ff8741cbfb
 
 EXPOSE 9998
