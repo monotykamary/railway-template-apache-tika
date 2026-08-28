@@ -13,7 +13,7 @@ The Deploy on Railway button is added after the published route is verified.
 - A public Caddy proxy with generated HTTP Basic authentication
 - A private Tika service reachable only over Railway's internal network
 
-Apache Tika 3.3.2 is the newest source release, but Apache has not published a matching stable Docker image. This template deliberately uses the newest stable official container release instead of a prerelease or locally repackaged binary.
+Apache Tika 4.0.0 is the newest stable source release and ships an official container tagged `4.0.0-1-full`; this template deliberately uses the newest stable official container release instead of a prerelease or locally repackaged binary.
 
 ## Usage
 
