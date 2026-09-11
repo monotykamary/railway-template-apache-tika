@@ -1,4 +1,4 @@
-FROM docker.io/caddy:2.10.2-alpine@sha256:d8c17a862962def15cde69863a3a463f25a2664942eafd7bdbf050e9c3116b83
+FROM docker.io/caddy:2.11.4-alpine@sha256:5f5c8640aae01df9654968d946d8f1a56c497f1dd5c5cda4cf95ab7c14d58648
 
 COPY Caddyfile /etc/caddy/Caddyfile
 COPY entrypoint.sh /usr/local/bin/tika-proxy-entrypoint
