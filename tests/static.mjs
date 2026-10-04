@@ -7,7 +7,7 @@ const caddy = readFileSync("proxy/Caddyfile", "utf8");
 const entrypoint = readFileSync("proxy/entrypoint.sh", "utf8");
 const readme = readFileSync("README.md", "utf8");
 
-assert.match(tika, /apache\/tika:4\.0\.0-1-full@sha256:[a-f0-9]{64}/);
+assert.match(tika, /apache\/tika:4\.1\.0-1-full@sha256:[a-f0-9]{64}/);
 assert.match(proxy, /caddy:2\.11\.4-alpine@sha256:[a-f0-9]{64}/);
 assert.doesNotMatch(`${tika}\n${proxy}`, /:latest/);
 assert.match(caddy, /handle \/healthz/);
