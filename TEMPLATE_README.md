@@ -2,7 +2,7 @@
 
 ## About Hosting Apache Tika
 
-Apache Tika extracts text and metadata from more than a thousand document formats. This template deploys the stable official `4.1.0-1-full` container behind an authenticated Caddy proxy.
+Apache Tika extracts text and metadata from more than a thousand document formats. This template deploys the stable official `4.1.0-2-full` container behind an authenticated Caddy proxy.
 
 Retrieve the generated `BASIC_AUTH_USER` and `BASIC_AUTH_PASSWORD` values from the proxy service before calling parsing endpoints.
 
