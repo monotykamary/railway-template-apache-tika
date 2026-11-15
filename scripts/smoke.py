@@ -4,7 +4,7 @@ import os,json,time,uuid,hashlib,tempfile,base64,urllib.request,urllib.error,url
 from pathlib import Path
 base=os.environ['BASE_URL'].rstrip('/')
 phase=os.environ.get('SMOKE_PHASE','boot')
-state=Path(tempfile.gettempdir())/('railway-smoke-'+hashlib.sha256(base.encode()).hexdigest()[:16]+'.json')
+state=Path(os.environ.get('SMOKE_STATE_FILE',str(Path(tempfile.gettempdir())/('railway-smoke-'+hashlib.sha256(base.encode()).hexdigest()[:16]+'.json'))))
 def req(path,method='GET',data=None,auth=None,headers=None):
  h=dict(headers or {})
  if auth:
@@ -28,4 +28,21 @@ text='Railway Tika extraction product probe'
 assert text in good(req('/tika',method='PUT',data=text,auth=auth,headers={'Content-Type':'text/plain','Accept':'text/plain'}))
 metadata=good(req('/meta',method='PUT',data=text,auth=auth,headers={'Content-Type':'text/plain','Accept':'application/json'}))
 assert 'text/plain' in metadata
-print(json.dumps({'phase':phase,'product':'tika','extraction':True,'metadata':True,'negative_auth':True,'persistence':'stateless'}))
+def pdf_fixture():
+ objects=[b'<< /Type /Catalog /Pages 2 0 R >>',b'<< /Type /Pages /Kids [3 0 R] /Count 1 >>',b'<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>',b'<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>']
+ stream=b'BT /F1 16 Tf 72 720 Td (Railway PDF parser proof) Tj ET'
+ objects.append(b'<< /Length '+str(len(stream)).encode()+b' >>\nstream\n'+stream+b'\nendstream')
+ data=b'%PDF-1.4\n'; offsets=[0]
+ for i,obj in enumerate(objects,1):
+  offsets.append(len(data));data+=str(i).encode()+b' 0 obj\n'+obj+b'\nendobj\n'
+ xref=len(data);data+=b'xref\n0 6\n0000000000 65535 f \n'
+ for offset in offsets[1:]:data+=('%010d 00000 n \n'%offset).encode()
+ return data+b'trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n'+str(xref).encode()+b'\n%%EOF\n'
+pdf=pdf_fixture()
+assert 'Railway PDF parser proof' in good(req('/tika',method='PUT',data=pdf,auth=auth,headers={'Content-Type':'application/pdf','Accept':'text/plain'}))
+pdfmeta=good(req('/meta',method='PUT',data=pdf,auth=auth,headers={'Content-Type':'application/pdf','Accept':'application/json'}))
+assert 'application/pdf' in pdfmeta
+bad=req('/tika',method='PUT',data=b'%PDF-1.4\ninvalid objects\n%%EOF',auth=auth,headers={'Content-Type':'application/pdf','Accept':'text/plain'})
+assert bad[0] in (400,422), 'malformed PDF unexpectedly accepted/status='+str(bad[0])
+
+print(json.dumps({'phase':phase,'pdf_extraction':True,'malformed_pdf_rejected':True,'product':'tika','extraction':True,'metadata':True,'negative_auth':True,'persistence':'stateless'}))
